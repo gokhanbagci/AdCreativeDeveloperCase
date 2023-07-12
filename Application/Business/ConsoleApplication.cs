@@ -61,12 +61,8 @@ namespace AdCreativeDeveloperCase.Application.Business
 
             _semaphoreSlim = new SemaphoreSlim(_downloadSettings.Parallelism);
 
-            string path = Path.GetDirectoryName(Directory.GetCurrentDirectory()) + _downloadSettings.SavePath;
-            if (Directory.Exists(path))
-            {
-                Directory.Delete(path, true);
-            }
-            else
+            string path = $"C:\\temp\\{_downloadSettings.SavePath}\\{Guid.NewGuid()}";
+            if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }

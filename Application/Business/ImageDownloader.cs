@@ -27,7 +27,7 @@
                 var response = await client.SendAsync(request, cancellationToken);
 
                 var filePath = $@"{_savePath}\{_index}.jpg";
-                await using var fs = new FileStream(filePath, FileMode.CreateNew);
+                await using var fs = new FileStream(filePath, FileMode.OpenOrCreate);
                 await response.Content.CopyToAsync(fs, cancellationToken);
 
                 OnFinished(new ImageDownloadFinishEventArgs(_index, _randomImagePath));
